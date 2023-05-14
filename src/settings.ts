@@ -31,6 +31,7 @@ export interface SRSettings {
     autoNextNote: boolean;
     disableFileMenuReviewOptions: boolean;
     maxNDaysNotesReviewQueue: number;
+    addReviewDate: boolean;
     // UI preferences
     initiallyExpandAllSubdecksInTree: boolean;
     // algorithm
@@ -72,6 +73,7 @@ export const DEFAULT_SETTINGS: SRSettings = {
     autoNextNote: false,
     disableFileMenuReviewOptions: false,
     maxNDaysNotesReviewQueue: 365,
+    addReviewDate: false,
     // UI settings
     initiallyExpandAllSubdecksInTree: false,
     // algorithm
@@ -541,6 +543,15 @@ export class SRSettingTab extends PluginSettingTab {
                         this.display();
                     });
             });
+        
+        new Setting(containerEl).setName(t("ADD_REVIEW_DATE")).addToggle((toggle) =>
+            toggle
+                .setValue(this.plugin.data.settings.addReviewDate)
+                .onChange(async (value) => {
+                    this.plugin.data.settings.addReviewDate = value;
+                    await this.plugin.savePluginData();
+                })
+        );
 
         containerEl.createEl("h3", { text: `${t("UI_PREFERENCES")}` });
 

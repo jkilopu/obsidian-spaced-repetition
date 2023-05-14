@@ -106,6 +106,7 @@ export default {
     DISABLE_FILE_MENU_REVIEW_OPTIONS_DESC:
         "After disabling, you can review using the command hotkeys. Reload Obsidian after changing this.",
     MAX_N_DAYS_REVIEW_QUEUE: "Maximum number of days to display on right panel",
+    ADD_REVIEW_DATE: "Add review date in frontmatter",
     MIN_ONE_DAY: "The number of days must be at least 1.",
     VALID_NUMBER_WARNING: "Please provide a valid number.",
     UI_PREFERENCES: "UI Preferences",

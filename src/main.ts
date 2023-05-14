@@ -558,6 +558,22 @@ export default class SRPlugin extends Plugin {
         }
         await this.app.vault.modify(note, fileText);
 
+        // add review date in the frontmatter
+        if (this.data.settings.addReviewDate) {
+            try {
+                await this.app.fileManager.processFrontMatter(note, (frontmatter : any) => {
+                    const reviewDate: string = window.moment(now).format("YYYY-MM-DD");
+                    frontmatter.review ??= [];
+                    frontmatter.review.push(reviewDate);
+                    if (this.data.settings.showDebugMessages) {
+                        console.log("frontmatter: ", frontmatter);
+                    }
+                })
+            } catch (e) {
+                console.log("Error yaml parsing: ", e.message);
+            }
+        }
+
         new Notice(t("RESPONSE_RECEIVED"));
 
         await this.sync();
